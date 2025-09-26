@@ -3,12 +3,13 @@ public class TimeSpan {
     private int minutes;
 
     public TimeSpan(int hours, int minutes) {
-        if (hours < 0 || minutes < 0 || minutes > 59) {
+        if (hours < 0 || minutes < 0) {
             this.hours = 0;
             this.minutes = 0;
         } else {
-            this.hours = hours;
-            this.minutes = minutes;
+            int totalMinutes = hours * 60 + minutes;
+            this.hours = totalMinutes / 60;
+            this.minutes = totalMinutes % 60;
         }
     }
 
@@ -21,7 +22,7 @@ public class TimeSpan {
     }
 
     public void add(int hours, int minutes) {
-        if (hours < 0 || minutes < 0 || minutes > 59) {
+        if (hours < 0 || minutes < 0) {
             return;
         }
         int totalMinutes = this.getTotalMinutes() + hours * 60 + minutes;
