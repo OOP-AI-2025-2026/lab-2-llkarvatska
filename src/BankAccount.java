@@ -1,11 +1,12 @@
 public class BankAccount {
     private String name;
     private double balance;
-    private double transactionFee = 0.0;
+    private double transactionFee;
 
     public BankAccount(String name, double balance) {
         this.name = name;
         this.balance = balance;
+        this.transactionFee = 0.0;
     }
 
     public void setTransactionFee(double fee) {
@@ -16,7 +17,7 @@ public class BankAccount {
 
     public void deposit(double amount) {
         if (amount > 0) {
-            balance += amount; // при поповненні комісія НЕ знімається
+            balance += amount; // депозит БЕЗ комісії
         }
     }
 
@@ -28,7 +29,7 @@ public class BankAccount {
         if (amount <= 0) {
             return false;
         }
-        double total = amount + transactionFee; // комісія діє лише при знятті
+        double total = amount + transactionFee; // комісія тільки при знятті
         if (balance >= total) {
             balance -= total;
             return true;
@@ -40,10 +41,10 @@ public class BankAccount {
         if (receiver == null || amount <= 0) {
             return false;
         }
-        double total = amount + transactionFee; // комісія діє при переказі
+        double total = amount + transactionFee; // відправник платить fee
         if (balance >= total) {
             balance -= total;
-            receiver.balance += amount; // отримувач отримує САМЕ amount, без fee
+            receiver.balance += amount; // отримувач отримує рівно amount
             return true;
         }
         return false;
