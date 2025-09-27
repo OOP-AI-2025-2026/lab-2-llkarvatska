@@ -1,46 +1,42 @@
 package ua.opnu;
 
-
 public class TimeSpan {
+    private int hours;
+    private int minutes;
 
-    // TODO: add class fields
-
-    TimeSpan(int hours, int minutes) {
-        // TODO: write constructor body
+    public TimeSpan(int hours, int minutes) {
+        if (hours < 0 || minutes < 0 || minutes >= 60) {
+            throw new IllegalArgumentException("Invalid time values");
+        }
+        this.hours = hours;
+        this.minutes = minutes;
     }
 
-    int getHours() {
-        return 0;
+    public void add(int hours, int minutes) {
+        if (hours < 0 || minutes < 0) {
+            throw new IllegalArgumentException("Cannot add negative values");
+        }
+        this.hours += hours;
+        this.minutes += minutes;
+        normalize();
     }
 
-    int getMinutes() {
-        // TODO: write method body
-        return 0;
+    public void addTimeSpan(TimeSpan other) {
+        if (other == null) throw new NullPointerException("TimeSpan cannot be null");
+        this.hours += other.hours;
+        this.minutes += other.minutes;
+        normalize();
     }
 
-    void add(int hours, int minutes) {
-        // TODO: write method body
+    private void normalize() {
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes = minutes % 60;
+        }
     }
 
-    void addTimeSpan(TimeSpan timespan) {
-        // TODO: write method body
-    }
-
-    double getTotalHours() {
-        // TODO: write method body
-        return 0;
-    }
-
-    int getTotalMinutes() {
-        // TODO: write method body
-        return 0;
-    }
-
-    void subtract(TimeSpan span) {
-        // TODO: write method body
-    }
-
-    void scale(int factor) {
-        // TODO: write method body
+    @Override
+    public String toString() {
+        return hours + "h " + minutes + "m";
     }
 }
