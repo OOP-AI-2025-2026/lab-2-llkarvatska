@@ -5,14 +5,19 @@ public class TimeSpan {
     private int minutes;
 
     public TimeSpan(int hours, int minutes) {
-        if (hours < 0) {
-            throw new IllegalArgumentException("Hours must be non-negative");
-        }
-        if (minutes < 0 || minutes >= 60) { // <-- додав перевірку на minutes >= 60
-            throw new IllegalArgumentException("Minutes must be between 0 and 59");
+        if (hours < 0 || minutes < 0) {
+            throw new IllegalArgumentException("Hours and minutes must be non-negative");
         }
         this.hours = hours;
         this.minutes = minutes;
+        normalize();
+    }
+
+    private void normalize() {
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes = minutes % 60;
+        }
     }
 
     public int getHours() {
@@ -32,25 +37,25 @@ public class TimeSpan {
         normalize();
     }
 
-    // метод, який вимагають тести
     public void addTimeSpan(TimeSpan other) {
         if (other == null) {
-            throw new NullPointerException("TimeSpan cannot be null"); // <-- змінив на NPE
+            throw new IllegalArgumentException("TimeSpan cannot be null");
         }
         this.hours += other.hours;
         this.minutes += other.minutes;
         normalize();
     }
 
-    private void normalize() {
-        if (minutes >= 60) {
-            hours += minutes / 60;
-            minutes = minutes % 60;
-        }
+    // додаткові методи для тестів
+    public int getTotalMinutes() {
+        return hours * 60 + minutes;
+    }
+
+    public double getTotalHours() {
+        return hours + minutes / 60.0;
     }
 
     @Override
-    public String toString() {
-        return hours + "h " + minutes + "m";
-    }
-}
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass
