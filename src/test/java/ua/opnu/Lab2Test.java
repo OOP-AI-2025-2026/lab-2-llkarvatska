@@ -414,7 +414,9 @@ public class Lab2Test {
             BankAccount a = new BankAccount();
             a.deposit(50.0);
             BankAccount b = new BankAccount();
-            boolean res = a.transfer(b, 100.0);
+            boolean res;
+            if (a.transfer(b, 100.0)) res = true;
+            else res = false;
             Assertions.assertFalse(res);
             Assertions.assertEquals(50.0, a.getBalance());
             Assertions.assertEquals(0.0, b.getBalance());

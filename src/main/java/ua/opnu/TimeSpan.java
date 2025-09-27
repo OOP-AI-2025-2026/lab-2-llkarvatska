@@ -5,24 +5,38 @@ public class TimeSpan {
     private int minutes;
 
     public TimeSpan(int hours, int minutes) {
-        if (hours < 0 || minutes < 0 || minutes >= 60) {
-            throw new IllegalArgumentException("Invalid time values");
+        if (hours < 0) {
+            throw new IllegalArgumentException("Hours must be non-negative");
+        }
+        if (minutes < 0 || minutes >= 60) { // <-- додав перевірку на minutes >= 60
+            throw new IllegalArgumentException("Minutes must be between 0 and 59");
         }
         this.hours = hours;
         this.minutes = minutes;
     }
 
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
     public void add(int hours, int minutes) {
         if (hours < 0 || minutes < 0) {
-            throw new IllegalArgumentException("Cannot add negative values");
+            throw new IllegalArgumentException("Hours and minutes must be non-negative");
         }
         this.hours += hours;
         this.minutes += minutes;
         normalize();
     }
 
+    // метод, який вимагають тести
     public void addTimeSpan(TimeSpan other) {
-        if (other == null) throw new NullPointerException("TimeSpan cannot be null");
+        if (other == null) {
+            throw new NullPointerException("TimeSpan cannot be null"); // <-- змінив на NPE
+        }
         this.hours += other.hours;
         this.minutes += other.minutes;
         normalize();
