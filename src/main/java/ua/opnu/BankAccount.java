@@ -1,75 +1,42 @@
 package ua.opnu;
 
 public class BankAccount {
-    private String name;
     private double balance;
-    private double transactionFee;
 
-    // Конструктор без параметрів (для тестів)
-    public BankAccount() {
-        this.name = "";
-        this.balance = 0.0;
-        this.transactionFee = 0.0;
-    }
-
-    // Конструктор з параметрами
-    public BankAccount(String name, double balance) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name cannot be null");
+    public BankAccount(double initialBalance) {
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Initial balance cannot be negative");
         }
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance cannot be negative");
-        }
-        this.name = name;
-        this.balance = balance;
-        this.transactionFee = 0.0;
-    }
-
-    public String getName() {
-        return name;
+        this.balance = initialBalance;
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public void setTransactionFee(double fee) {
-        if (fee < 0) {
-            throw new IllegalArgumentException("Fee cannot be negative");
-        }
-        this.transactionFee = fee;
-    }
-
     public void deposit(double amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Deposit cannot be negative");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit must be positive");
         }
         balance += amount;
     }
 
-    public boolean withdraw(double amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Withdraw cannot be negative");
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdraw must be positive");
         }
-        if (balance >= amount) {
-            balance -= amount;
-            return true;
+        if (amount > balance) {
+            throw new IllegalArgumentException("Not enough funds");
         }
-        return false;
+        balance -= amount;
     }
 
-    public boolean transfer(BankAccount receiver, double amount) {
-        if (receiver == null) {
-            throw new NullPointerException("Receiver cannot be null");
+    //  метод для відсотків
+    public void addInterest(double rate) {
+        if (rate < 0) {
+            throw new IllegalArgumentException("Rate cannot be negative");
         }
-        if (amount < 0) {
-            throw new IllegalArgumentException("Transfer amount cannot be negative");
-        }
-        if (balance >= amount + transactionFee) {
-            balance -= (amount + transactionFee);
-            receiver.balance += amount;
-            return true;
-        }
-        return false;
+        balance += balance * rate / 100.0;
     }
 }
+
