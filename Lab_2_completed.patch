@@ -1,0 +1,238 @@
+Subject: [PATCH] Lab 2 completed
+---
+Index: src/main/java/ua/opnu/Student.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ua/opnu/Student.java b/src/main/java/ua/opnu/Student.java
+--- a/src/main/java/ua/opnu/Student.java	(revision 7ead67836c537384863fe1c4f2fa4a392a28bf57)
++++ b/src/main/java/ua/opnu/Student.java	(date 1759386979085)
+@@ -8,6 +8,7 @@
+     private int year;
+     private List<String> courses;
+ 
++
+     public Student(String name, int year) {
+         if (name == null || name.isEmpty()) {
+             throw new IllegalArgumentException("Name cannot be null or empty");
+@@ -20,14 +21,17 @@
+         this.courses = new ArrayList<>();
+     }
+ 
++
+     public String getName() {
+         return name;
+     }
+ 
++
+     public int getYear() {
+         return year;
+     }
+ 
++
+     public void addCourse(String courseName) {
+         if (courseName == null || courseName.isEmpty()) { // <-- додав перевірку
+             throw new IllegalArgumentException("Course name cannot be null or empty");
+@@ -35,6 +39,7 @@
+         courses.add(courseName);
+     }
+ 
++
+     public void dropAll() {
+         courses.clear();
+     }
+@@ -43,7 +48,9 @@
+         return courses.size();
+     }
+ 
++
+     public int getTuition() {
+         return year * 20000;
+     }
++
+ }
+Index: src/main/java/ua/opnu/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ua/opnu/Main.java b/src/main/java/ua/opnu/Main.java
+--- a/src/main/java/ua/opnu/Main.java	(revision 7ead67836c537384863fe1c4f2fa4a392a28bf57)
++++ b/src/main/java/ua/opnu/Main.java	(date 1759386405971)
+@@ -5,11 +5,13 @@
+         BankAccount a = new BankAccount("Alice", 500);
+         BankAccount b = new BankAccount("Bob", 300);
+ 
++
+         a.transfer(b, 100);
+ 
+         System.out.println(a.getName() + " balance: " + a.getBalance());
+         System.out.println(b.getName() + " balance: " + b.getBalance());
+ 
++
+         // --- Student demo ---
+         Student s = new Student("Іван", 2022);
+         s.addCourse("Математика");
+Index: src/main/java/ua/opnu/TimeSpan.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ua/opnu/TimeSpan.java b/src/main/java/ua/opnu/TimeSpan.java
+--- a/src/main/java/ua/opnu/TimeSpan.java	(revision 7ead67836c537384863fe1c4f2fa4a392a28bf57)
++++ b/src/main/java/ua/opnu/TimeSpan.java	(date 1759386979054)
+@@ -4,6 +4,7 @@
+     private int hours;
+     private int minutes;
+ 
++
+     public TimeSpan(int hours, int minutes) {
+         if (hours < 0) {
+             throw new IllegalArgumentException("Hours must be non-negative");
+@@ -15,6 +16,7 @@
+         this.minutes = minutes;
+     }
+ 
++
+     public int getHours() {
+         return hours;
+     }
+@@ -23,6 +25,7 @@
+         return minutes;
+     }
+ 
++
+     public void add(int hours, int minutes) {
+         if (hours < 0 || minutes < 0) {
+             throw new IllegalArgumentException("Hours and minutes must be non-negative");
+@@ -32,6 +35,7 @@
+         normalize();
+     }
+ 
++
+     // метод, який вимагають тести
+     public void addTimeSpan(TimeSpan other) {
+         if (other == null) {
+@@ -42,6 +46,7 @@
+         normalize();
+     }
+ 
++
+     private void normalize() {
+         if (minutes >= 60) {
+             hours += minutes / 60;
+@@ -49,8 +54,10 @@
+         }
+     }
+ 
++
+     @Override
+     public String toString() {
+         return hours + "h " + minutes + "m";
+     }
++
+ }
+Index: src/test/java/ua/opnu/Lab2Test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ua/opnu/Lab2Test.java b/src/test/java/ua/opnu/Lab2Test.java
+--- a/src/test/java/ua/opnu/Lab2Test.java	(revision 7ead67836c537384863fe1c4f2fa4a392a28bf57)
++++ b/src/test/java/ua/opnu/Lab2Test.java	(date 1759387371028)
+@@ -5,12 +5,14 @@
+ import org.junit.jupiter.api.Nested;
+ import org.junit.jupiter.api.Test;
+ 
++
+ public class Lab2Test {
+ 
+     @Nested
+     @DisplayName("Tests for TimeSpan task")
+     class TimeSpanTest {
+ 
++
+         @Test
+         @DisplayName("Test constructor with valid input")
+         void test1() {
+@@ -67,6 +69,7 @@
+             Assertions.assertEquals("3h 10m", t.toString());
+         }
+ 
++
+         @Test
+         @DisplayName("Test add method with minutes only")
+         void test9() {
+@@ -110,6 +113,7 @@
+             Assertions.assertEquals("1h 50m", t1.toString());
+         }
+ 
++
+         @Test
+         @DisplayName("Test addTimeSpan with only hours")
+         void test14() {
+@@ -191,6 +195,7 @@
+             Assertions.assertEquals("111h 0m", t.toString());
+         }
+ 
++        
+         @Test
+         @DisplayName("Test adding with multiple overflows")
+         void test24() {
+Index: src/main/java/ua/opnu/BankAccount.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ua/opnu/BankAccount.java b/src/main/java/ua/opnu/BankAccount.java
+--- a/src/main/java/ua/opnu/BankAccount.java	(revision 7ead67836c537384863fe1c4f2fa4a392a28bf57)
++++ b/src/main/java/ua/opnu/BankAccount.java	(date 1759386979070)
+@@ -5,6 +5,7 @@
+     private double balance;
+     private double transactionFee;
+ 
++
+     // Конструктор без параметрів (для тестів)
+     public BankAccount() {
+         this.name = "";
+@@ -12,6 +13,7 @@
+         this.transactionFee = 0.0;
+     }
+ 
++
+     // Конструктор з параметрами
+     public BankAccount(String name, double balance) {
+         if (name == null) {
+@@ -25,6 +27,7 @@
+         this.transactionFee = 0.0;
+     }
+ 
++
+     public String getName() {
+         return name;
+     }
+@@ -33,6 +36,7 @@
+         return balance;
+     }
+ 
++
+     public void setTransactionFee(double fee) {
+         if (fee < 0) {
+             throw new IllegalArgumentException("Fee cannot be negative");
+@@ -47,6 +51,7 @@
+         balance += amount;
+     }
+ 
++
+     public boolean withdraw(double amount) {
+         if (amount < 0) {
+             throw new IllegalArgumentException("Withdraw cannot be negative");
+@@ -58,6 +63,7 @@
+         return false;
+     }
+ 
++
+     public boolean transfer(BankAccount receiver, double amount) {
+         if (receiver == null) {
+             throw new NullPointerException("Receiver cannot be null");
