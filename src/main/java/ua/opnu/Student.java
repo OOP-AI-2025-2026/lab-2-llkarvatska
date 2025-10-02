@@ -8,6 +8,7 @@ public class Student {
     private int year;
     private List<String> courses;
 
+
     public Student(String name, int year) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
@@ -20,13 +21,16 @@ public class Student {
         this.courses = new ArrayList<>();
     }
 
+
     public String getName() {
         return name;
     }
 
+
     public int getYear() {
         return year;
     }
+
 
     public void addCourse(String courseName) {
         if (courseName == null || courseName.isEmpty()) { // <-- додав перевірку
@@ -34,6 +38,7 @@ public class Student {
         }
         courses.add(courseName);
     }
+
 
     public void dropAll() {
         courses.clear();
@@ -43,7 +48,9 @@ public class Student {
         return courses.size();
     }
 
+
     public int getTuition() {
         return year * 20000;
     }
+
 }

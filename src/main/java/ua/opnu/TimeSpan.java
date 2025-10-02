@@ -4,6 +4,7 @@ public class TimeSpan {
     private int hours;
     private int minutes;
 
+
     public TimeSpan(int hours, int minutes) {
         if (hours < 0) {
             throw new IllegalArgumentException("Hours must be non-negative");
@@ -15,6 +16,7 @@ public class TimeSpan {
         this.minutes = minutes;
     }
 
+
     public int getHours() {
         return hours;
     }
@@ -22,6 +24,7 @@ public class TimeSpan {
     public int getMinutes() {
         return minutes;
     }
+
 
     public void add(int hours, int minutes) {
         if (hours < 0 || minutes < 0) {
@@ -31,6 +34,7 @@ public class TimeSpan {
         this.minutes += minutes;
         normalize();
     }
+
 
     // метод, який вимагають тести
     public void addTimeSpan(TimeSpan other) {
@@ -42,6 +46,7 @@ public class TimeSpan {
         normalize();
     }
 
+
     private void normalize() {
         if (minutes >= 60) {
             hours += minutes / 60;
@@ -49,8 +54,10 @@ public class TimeSpan {
         }
     }
 
+
     @Override
     public String toString() {
         return hours + "h " + minutes + "m";
     }
+
 }

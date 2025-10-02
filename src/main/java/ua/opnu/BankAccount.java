@@ -5,12 +5,14 @@ public class BankAccount {
     private double balance;
     private double transactionFee;
 
+
     // Конструктор без параметрів (для тестів)
     public BankAccount() {
         this.name = "";
         this.balance = 0.0;
         this.transactionFee = 0.0;
     }
+
 
     // Конструктор з параметрами
     public BankAccount(String name, double balance) {
@@ -25,6 +27,7 @@ public class BankAccount {
         this.transactionFee = 0.0;
     }
 
+
     public String getName() {
         return name;
     }
@@ -32,6 +35,7 @@ public class BankAccount {
     public double getBalance() {
         return balance;
     }
+
 
     public void setTransactionFee(double fee) {
         if (fee < 0) {
@@ -47,6 +51,7 @@ public class BankAccount {
         balance += amount;
     }
 
+
     public boolean withdraw(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Withdraw cannot be negative");
@@ -57,6 +62,7 @@ public class BankAccount {
         }
         return false;
     }
+
 
     public boolean transfer(BankAccount receiver, double amount) {
         if (receiver == null) {

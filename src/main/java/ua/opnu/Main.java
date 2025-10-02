@@ -5,10 +5,12 @@ public class Main {
         BankAccount a = new BankAccount("Alice", 500);
         BankAccount b = new BankAccount("Bob", 300);
 
+
         a.transfer(b, 100);
 
         System.out.println(a.getName() + " balance: " + a.getBalance());
         System.out.println(b.getName() + " balance: " + b.getBalance());
+
 
         // --- Student demo ---
         Student s = new Student("Іван", 2022);

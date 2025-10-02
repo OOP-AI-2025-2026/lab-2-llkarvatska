@@ -236,6 +236,8 @@ public class Lab2Test {
             Assertions.assertEquals("6h 6m", t.toString());
         }
 
+
+
         @Test
         @DisplayName("Test negative case add minutes")
         void test29() {
@@ -304,6 +306,8 @@ public class Lab2Test {
             TimeSpan t = new TimeSpan(0, 59);
             Assertions.assertEquals("0h 59m", t.toString());
         }
+
+
 
         @Test
         @DisplayName("Test constructor borderline 2")
