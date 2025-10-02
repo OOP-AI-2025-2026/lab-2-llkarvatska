@@ -274,6 +274,7 @@ public class Lab2Test {
             Assertions.assertEquals("5h 5m", t.toString());
         }
 
+
         @Test
         @DisplayName("Test addTimeSpan zero")
         void test34() {

@@ -14,6 +14,7 @@ public class BankAccount {
     }
 
 
+
     // Конструктор з параметрами
     public BankAccount(String name, double balance) {
         if (name == null) {

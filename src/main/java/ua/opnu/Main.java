@@ -12,6 +12,7 @@ public class Main {
         System.out.println(b.getName() + " balance: " + b.getBalance());
 
 
+
         // --- Student demo ---
         Student s = new Student("Іван", 2022);
         s.addCourse("Математика");

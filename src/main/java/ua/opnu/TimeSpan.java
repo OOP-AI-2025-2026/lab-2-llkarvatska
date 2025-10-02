@@ -26,6 +26,7 @@ public class TimeSpan {
     }
 
 
+
     public void add(int hours, int minutes) {
         if (hours < 0 || minutes < 0) {
             throw new IllegalArgumentException("Hours and minutes must be non-negative");
